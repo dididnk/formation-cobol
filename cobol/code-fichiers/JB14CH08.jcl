@@ -1,0 +1,84 @@
+//JB14CH08  JOB (JB14CH08),'JB14CH08',MSGLEVEL=(1,1),                   
+//          MSGCLASS=A,CLASS=A,NOTIFY=&SYSUID                           
+//*=====================================================================
+//*                 DEL/DEFINITION DES 4 FICHIERS KSDS                  
+//*=====================================================================
+//STEP01   EXEC PGM=IDCAMS                                              
+//SYSPRINT DD  SYSOUT=*                                                 
+//SYSIN    DD  *                                                        
+    DELETE FORM1011.AGENCE.KSDS CLUSTER PURGE                           
+    DEFINE CLUSTER (NAME(FORM1011.AGENCE.KSDS)      -                   
+                    TRACKS ( 2 1 )                  -                   
+                    VOL    (FDDBAS)                 -                   
+                    CISZ   (4096)                   -                   
+                    RECORDSIZE (37   37)            -                   
+                    INDEXED                         -                   
+                    KEYS(7,0)                       -                   
+                    SHAREOPTIONS(1,3)               -                   
+                    NOREUSE                         -                   
+                    )                               -                   
+           DATA  (NAME(FORM1011.AGENCE.KSDS.DATA))  -                   
+           INDEX (NAME(FORM1011.AGENCE.KSDS.INDEX))                     
+           IF LASTCC=0 THEN                         -                   
+              LISTCAT ALL LEVEL(FORM1011.AGENCE.KSDS)                   
+                                                                        
+    DELETE FORM1011.RIB.KSDS CLUSTER PURGE                              
+    DEFINE CLUSTER (NAME(FORM1011.RIB.KSDS)      -                      
+                    TRACKS ( 2 1 )                  -                   
+                    VOL    (FDDBAS)                 -                   
+                    CISZ   (4096)                   -                   
+                    RECORDSIZE (48   48)            -                   
+                    INDEXED                         -                   
+                    KEYS(5,0)                       -                   
+                    SHAREOPTIONS(1,3)               -                   
+                    NOREUSE                         -                   
+                    )                               -                   
+           DATA  (NAME(FORM1011.RIB.KSDS.DATA))  -                      
+           INDEX (NAME(FORM1011.RIB.KSDS.INDEX))   
+           IF LASTCC=0 THEN                         -                   
+              LISTCAT ALL LEVEL(FORM1011.RIB.KSDS)                      
+                                                                        
+    DELETE FORM1011.CLT.KSDS CLUSTER PURGE                              
+    DEFINE CLUSTER (NAME(FORM1011.CLT.KSDS)      -                      
+                    TRACKS ( 2 1 )                  -                   
+                    VOL    (FDDBAS)                 -                   
+                    CISZ   (4096)                   -                   
+                    RECORDSIZE (52   52)            -                   
+                    INDEXED                         -                   
+                    KEYS(5,0)                       -                   
+                    SHAREOPTIONS(1,3)               -                   
+                    NOREUSE                         -                   
+                    )                               -                   
+           DATA  (NAME(FORM1011.CLT.KSDS.DATA))  -                      
+           INDEX (NAME(FORM1011.CLT.KSDS.INDEX))                        
+           IF LASTCC=0 THEN                         -                   
+              LISTCAT ALL LEVEL(FORM1011.CLT.KSDS)                      
+                                                                        
+    DELETE FORM1011.MVTC.ESDS CLUSTER PURGE                             
+    DEFINE CLUSTER (NAME(FORM1011.MVTC.ESDS)      -                     
+                    TRACKS ( 2 1 )                  -                   
+                    VOL    (FDDBAS)                 -                   
+                    CISZ   (4096)                   -                   
+                    RECORDSIZE (25   25)            -                   
+                    SHAREOPTIONS(1,3)               -                   
+                    NONINDEXED                      -                   
+                    REUSE                         -                     
+                    )                               -                   
+           DATA  (NAME(FORM1011.MVTC.ESDS.DATA))                        
+           IF LASTCC=0 THEN                         -                   
+              LISTCAT ALL LEVEL(FORM1011.MVTC.ESDS)                     
+/*                                                                      
+//*=====================================================================
+//*          EXECUTION PROGRAMME D'INITIALISATION DES 4 FICHIERS        
+//*=====================================================================
+//RUN      EXEC PGM=PG14CH08                                            
+//BUFFER   DD DSN=FORM1011.BUFFER.ESDS,DISP=SHR                         
+//MVTC     DD DSN=FORM1011.MVTC.ESDS,DISP=SHR                           
+//AGENCE   DD DSN=FORM1011.AGENCE.KSDS,DISP=SHR           
+//CLT      DD DSN=FORM1011.CLT.KSDS,DISP=SHR                            
+//RIB      DD DSN=FORM1011.RIB.KSDS,DISP=SHR                            
+//STEPLIB  DD DSN=FORM1011.COBOL.LOAD(PG14CH08),DISP=SHR                
+//SYSPRINT DD SYSOUT=*                                                  
+//SYSOUT   DD SYSOUT=*                                                  
+/*                                                                      
+//                                                                      

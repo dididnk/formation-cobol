@@ -1,0 +1,39 @@
+***************************** Top of Data ******************************
+       IDENTIFICATION DIVISION.                                         
+       PROGRAM-ID. PG08CH05.                                            
+       AUTHOR.     N GAIGI.                                             
+      * PROGRAMME EVALUATE (CONDITIONNEL)                               
+       ENVIRONMENT DIVISION.                                            
+       CONFIGURATION SECTION.                                           
+       SOURCE-COMPUTER. XXX-ZOS WITH DEBUGGING MODE.                    
+       DATA DIVISION.                                                   
+       FILE SECTION.                                                    
+       WORKING-STORAGE SECTION.                                         
+       01  WS-VAR.                                                      
+           05  WS-NOTE-EXAM   PIC 9(2)V9(2).                            
+           05  WS-NOTE-STAGE  PIC 9(2)V9(2).                            
+           05  WS-DECISION    PIC X(50).                                
+       PROCEDURE DIVISION.                                              
+       P-PG08CH05.                                                      
+           PERFORM INIT.                                                
+           PERFORM TRAIT.                                               
+           PERFORM FIN.                                                 
+      INIT.                                                            
+          INITIALIZE WS-VAR.                                           
+          MOVE 17 TO NOTE-EXAM.                                        
+          MOVE  9 TO NOTE-STAGE.                                       
+      TRAIT.                                                           
+          EVALUATE NOTE-EXAM ALSO NOTE-STAGE                           
+          WHEN 10 THRU 20 ALSO 10 THRU 20                              
+               MOVE "RECU" TO WS-DECISION                              
+          WHEN 9 THRU 10 ALSO 12 THRU 20                               
+               MOVE "RATTRAPE PAR LE STAGE" TO WS-DECISION             
+          WHEN 14 THRU 20 ALSO 9 THRU 10                               
+               MOVE "RATTRAPE PAR NOTES EXAM" TO WS-DECISION           
+          WHEN OTHER                                                   
+               MOVE "ELIMINE" TO WS-DECISION                           
+          END-EVALUATE.                                                
+      FIN.                                                             
+     D    DISPLAY 'DECISION DU JURY: ' WS-DECISION.                    
+          STOP RUN.                                                    
+*************************** Bottom of Data ****************************

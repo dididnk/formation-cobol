@@ -1,0 +1,56 @@
+//FILEKSDS JOB (FILEKSDS),'FILEKSDS',MSGLEVEL=(1,1),
+//         MSGCLASS=C,CLASS=A,PRTY=4,NOTIFY=&SYSUID
+//*===================================================*
+//*   CREATION DU KSDS + CHARGEMENT AVEC ENTDATA
+//*===================================================*
+
+//DELKSDS EXEC PGM=IDCAMS
+//SYSPRINT DD SYSOUT=*
+//SYSIN DD *
+    DELETE FORM1011.FILES.EMP.KSDS CLUSTER PURGE
+/*
+
+//STEPDEF EXEC PGM=IDCAMS
+//SYSPRINT DD SYSOUT=*
+//SYSIN DD *
+    DEFINE CLUSTER (NAME(FORM1011.FILES.EMP.KSDS) -
+                    INDEXED                       -
+                    VOL(FDDBAS)                   -
+                    TRACKS(1 1)                   -
+                    KEYS(5 0)                     -
+                    RECORDSIZE(80 80)             -
+                    CISZ(4096)                    -
+                    NOREUSE)                      -
+          DATA (NAME(FORM1011.FILES.EMP.KSDS.DATA)) -
+          INDEX(NAME(FORM1011.FILES.EMP.KSDS.INDEX))
+/*
+
+//STEPLOAD EXEC PGM=IDCAMS
+//SYSPRINT DD SYSOUT=*
+//ENTDATA DD *
+00001  COLUCCI     PARIS       00000
+00002  DELANOE     PARIS       05500
+00003  GOLDMAN     PARIS       15500
+00004  HIDALGO     PARIS       12300
+00005  CURIE       PARIS       00000
+00006  PAGNOL      MARSEILLE   12000
+00007  BEJART      MARSEILLE   09500
+00008  TAPIE       MARSEILLE   00000
+00009  CISSE       MARSEILLE   04325
+00010  MASSALIA    MARSEILLE   00000
+00011  ABIDAL      LYON        06750
+00012  RENARD      LYON        08250
+00013  BRAZIER     LYON        04500
+00014  FRAY        LYON        02300
+00015  MAGNIN      LYON        19000
+00016  BENGUIGUI   LILLE       04090
+00017  DE GAULLE   LILLE       00000
+00018  HAMIDOU     LILLE       75000
+00019  FOURATI     LILLE       11000
+00020  DEGROOT     LILLE       14500
+/*
+//SYSIN DD *
+    REPRO INFILE(ENTDATA) -
+          OUTDATASET(FORM1011.FILES.EMP.KSDS)
+/*
+//

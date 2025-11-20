@@ -1,0 +1,49 @@
+***************************** Top of Data ******************************
+       IDENTIFICATION DIVISION.                                         
+       PROGRAM-ID. PG10CH06.                                            
+       AUTHOR.     N GAIGI.                                             
+      * PROGRAMME BOUCLES                                               
+       ENVIRONMENT DIVISION.                                            
+       CONFIGURATION SECTION.                                           
+       SOURCE-COMPUTER. XXX-ZOS WITH DEBUGGING MODE.                    
+       DATA DIVISION.                                                   
+       FILE SECTION.                                                    
+       WORKING-STORAGE SECTION.                                         
+       01  WS-VDIM1  PIC 9(2).                                          
+       01  WS-VDIM2  PIC 9(2).                                          
+       01  TABLEAU-COURS.                                               
+           05  WS-VAR1   OCCURS 10 TIMES.                               
+               10   WS-VAR2 PIC A(10).                                  
+               10   WS-VAR3 OCCURS 5 TIMES.                             
+                    15 WS-ELT  PIC X(10).                               
+       PROCEDURE DIVISION.                                              
+       P-PG07CH05.                                                      
+          PERFORM INIT.                                                
+     *    PERFORM TRAIT UNTIL WS-COMPTEUR > 10.                        
+          PERFORM TRAIT.                                               
+          PERFORM FIN.                                                 
+      INIT.                                                            
+          INITIALIZE  TABLEAU-COURS.                                   
+          MOVE 'HELLO'     TO WS-ELT(2,4).                             
+          MOVE 'BONGIORNO'     TO WS-ELT(6,3).                         
+          MOVE '3ASLAMA'     TO WS-ELT(4,1).                           
+          MOVE 'BONJOUR'     TO WS-ELT(10,5).                          
+      TRAIT.                                                           
+          DISPLAY 'AFFICHAGE DES ELTS DU TABL: '.                      
+          MOVE 1 TO WS-VDIM1.                                          
+          PERFORM PARCOURS-TAB UNTIL WS-VDIM1 > 10.                    
+      FIN.                                                             
+          STOP RUN.                                                    
+     *----------------------NIVEAU 2                                   
+      PARCOURS-TAB.                                                    
+     D    DISPLAY 'ENTREE TAB, INDICE1= ' WS-VDIM1.                    
+          DISPLAY 'VALEUR DE LA CELLULE: ' WS-VAR2(WS-VDIM1).          
+          MOVE 1 TO WS-VDIM2.                                          
+          PERFORM PARCOURS-TAB2 UNTIL WS-VDIM2 > 5.                    
+          ADD 1 TO WS-VDIM1.                                           
+     *----------------------NIVEAU 3                                   
+      PARCOURS-TAB2.                                                   
+     D    DISPLAY 'ENTREE TAB2, INDICE2= ' WS-VDIM2.                   
+          DISPLAY WS-ELT(WS-VDIM1 , WS-VDIM2).                         
+          ADD 1 TO WS-VDIM2.                                           
+*************************** Bottom of Data ****************************

@@ -1,0 +1,88 @@
+//JB12CH07 JOB JB12CH07,'JB12CH07',MSGLEVEL=(1,1),REGION=4M,            
+//           MSGCLASS=A,CLASS=A,NOTIFY=&SYSUID                          
+//*---------------------------------------------                        
+//*JCL DELETE PS EMPLOYE                                                
+//*---------------------------------------------                        
+//ETAPE1 EXEC PGM=IEFBR14                                               
+//SYSPRINT DD SYSOUT=*                                                  
+//SYSOUT   DD SYSOUT=*                                                  
+//UT01     DD DSN=FORM1011.COBOL.FEMP-PS,                               
+//            DISP=(OLD,DELETE,DELETE)                                  
+/*                                                                      
+//*----------------------------------------------------------------     
+//*ETAPE2 DEFINITION DE PHYSICAL SEQ. ET LE CHARGER PAR LE IEBGENER     
+//*----------------------------------------------------------------     
+//ETAPE2 EXEC PGM=IEBGENER                                              
+//SYSPRINT DD SYSOUT=*                                                  
+//SYSUT1 DD *                                                           
+00001  COLUCCI     PARIS       00000                                    
+00002  DELANOE     PARIS       05500                                    
+00003  GOLDMAN     PARIS       15500                                    
+00004  HIDALGO     PARIS       12300                                    
+00005  CURIE       PARIS       00000                                    
+00006  PAGNOL      MARSEILLE   12000                                    
+00007  BEJART      MARSEILLE   09500                                    
+00008  TAPIE       MARSEILLE   00000                                    
+00009  CISSE       MARSEILLE   04325                                    
+00010  MASSALIA    MARSEILLE   00000                                    
+00011  ABIDAL      LYON        06750                                    
+00012  RENARD      LYON        08250                                    
+00013  BRAZIER     LYON        04500                                    
+00014  FRAY        LYON        02300                                    
+00015  MAGNIN      LYON        19000                                    
+00016  BENGUIGUI   LILLE       04090                                    
+00017  DE GAULLE   LILLE       00000                                    
+00018  HAMIDOU     LILLE       75000                                    
+00019  FOURATI     LILLE       11000                                    
+00020  DEGROOT     LILLE       14500                                    
+/*                                                                      
+//SYSUT2  DD DSN=FORM1011.COBOL.FEMP-PS,DISP=(NEW,CATLG,DELETE),        
+//           SPACE=(TRK,(1,1)),UNIT=3390,VOL=SER=FDDBAS,                
+//           DCB=(LRECL=80,BLKSIZE=0,RECFM=FB,DSORG=PS)                 
+//SYSIN   DD DUMMY                                                      
+/*                                                                      
+//*---------------------------------------------                        
+//*ETAPE3  JCL DE DEFINITION DE VSAM ESDS CLUSTER                       
+//*---------------------------------------------                        
+//ETAPE3 EXEC PGM=IDCAMS                                                
+//SYSPRINT DD SYSOUT=*                                                  
+//SYSIN DD *                                                            
+    DELETE FORM1011.COBOL.FEMP-ES  PURGE                                
+    DEFINE CLUSTER (NAME(FORM1011.COBOL.FEMP-ES)  -                     
+                    TRACKS ( 1 1 )                  -                   
+                    VOL    (FDDBAS)                 -                   
+                    CISZ   (4096)                   -                   
+                    RECORDSIZE (80   80)            -                   
+                    SHAREOPTIONS(1,3)               -                   
+                    NONINDEXED                      -                   
+                    REUSE                           -                   
+                    )                               -                   
+           DATA  (NAME(FORM1011.COBOL.FEMP-ES.DATA))                    
+    IF LASTCC=0 THEN                                -                   
+       LISTCAT ALL LEVEL(FORM1011.COBOL.FEMP-ES)                        
+/*                                                                      
+//*---------------------------------------------                        
+//*ETAPE4 COPY PS SUR ESDS                                              
+//*---------------------------------------------                        
+//ETAPE4   EXEC PGM=IDCAMS                                              
+//SYSPRINT DD   SYSOUT=*                                                
+//INPUT    DD   DSN=FORM1011.COBOL.FEMP-PS,DISP=SHR                     
+//OUTPUT   DD   DSN=FORM1011.COBOL.FEMP-ES,DISP=SHR                     
+//SYSIN DD *                                                            
+      REPRO  -                                                          
+           INFILE(INPUT) -                                              
+           OUTFILE(OUTPUT)                                              
+/*                                                                      
+//*---------------------------------------------                        
+//*ETAPE5   PRINT VSAM FILE                                             
+//*---------------------------------------------                        
+//ETAPE5 EXEC PGM=IDCAMS                                                
+//SYSPRINT DD SYSOUT=*                                                  
+//SYSOUT   DD SYSOUT=*                                                  
+//INDD  DD DSN=FORM1011.COBOL.FEMP-ES,DISP=SHR                          
+//SYSIN DD *                                                            
+     PRINT -                                                            
+     INFILE(INDD) -                                                     
+     CHAR                                                               
+/*                                                                      
+//                                                                      

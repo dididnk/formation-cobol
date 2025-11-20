@@ -1,0 +1,42 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. PG13CH08.
+       AUTHOR. E NGBAME.
+
+       ENVIRONMENT DIVISION.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT ESDSFILE ASSIGN TO "FORM1011.FILES.EMP.PS"
+               ORGANIZATION IS SEQUENTIAL
+               ACCESS MODE IS SEQUENTIAL
+               FILE STATUS IS FS.
+
+       DATA DIVISION.
+       FILE SECTION.
+       FD ESDSFILE
+           RECORDING MODE IS F
+           RECORD CONTAINS 80 CHARACTERS.
+       01 ESDS-REC    PIC X(80).
+
+       WORKING-STORAGE SECTION.
+       01 FS PIC XX.
+
+       PROCEDURE DIVISION.
+       MAIN-PARA.
+           OPEN OUTPUT ESDSFILE
+           IF FS NOT = "00"
+               DISPLAY "ERREUR OPEN : " FS
+               STOP RUN
+           END-IF
+
+           MOVE "NOUVEL ENREGISTREMENT EXO2" TO ESDS-REC
+           WRITE ESDS-REC
+           IF FS NOT = "00"
+               DISPLAY "ERREUR WRITE : " FS
+           END-IF
+
+           CLOSE ESDSFILE
+           IF FS NOT = "00"
+               DISPLAY "ERREUR CLOSE : " FS
+           END-IF
+
+           STOP RUN.

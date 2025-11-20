@@ -1,0 +1,18 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. CALC-SOMME.
+
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01  WS-MESSAGE PIC X(30) VALUE "Sous-programme exécuté".
+
+       LINKAGE SECTION.
+       01  NOMBRE1     PIC 9(4).
+       01  NOMBRE2     PIC 9(4).
+       01  RESULTAT    PIC 9(5).
+
+       PROCEDURE DIVISION USING NOMBRE1, NOMBRE2, RESULTAT.
+       DEBUT.
+           DISPLAY WS-MESSAGE
+           COMPUTE RESULTAT = NOMBRE1 + NOMBRE2
+           DISPLAY "Calcul: " NOMBRE1 " + " NOMBRE2 " = " RESULTAT
+           GOBACK.

@@ -1,0 +1,47 @@
+***************************** Top of Data ******************************
+       IDENTIFICATION DIVISION.                                         
+       PROGRAM-ID. PG09CH05.                                            
+       AUTHOR.     N GAIGI.                                             
+      * PROGRAMME BOUCLES                                               
+       ENVIRONMENT DIVISION.                                            
+       CONFIGURATION SECTION.                                           
+       SOURCE-COMPUTER. XXX-ZOS WITH DEBUGGING MODE.                    
+       DATA DIVISION.                                                   
+       FILE SECTION.                                                    
+       WORKING-STORAGE SECTION.                                         
+       01  WS-VAR1   PIC 9(2).                                          
+       01  WS-VAR2   PIC 9(2).                                          
+       01  WS-VAR3   PIC 9(2).                                          
+       PROCEDURE DIVISION.                                              
+       P-PG09CH05.                                                      
+           PERFORM INIT.                                                
+           PERFORM BOUC1 UNTIL WS-VAR1 = 6.                             
+           PERFORM FIN.                                                 
+      *--------------------------NIVEAU 1                               
+       INIT.                                                            
+           MOVE ZEROES       TO WS-VAR1 WS-VAR2 WS-VAR3.                
+           MOVE 1 TO WS-VAR1.                                           
+       BOUC1.                                                           
+      D    DISPLAY '            JE SUIS BIEN DANS LA BOUCLE1: ' WS-VAR1.
+           MOVE 1 TO WS-VAR2.                                           
+           PERFORM BOUC2 UNTIL WS-VAR2 = 4.                             
+      D    DISPLAY '****************************: '.                    
+      D    DISPLAY '*********INCREMENTATION VAR1: '.                    
+      D    DISPLAY '****************************: '.                    
+           ADD 1 TO WS-VAR1.                                            
+       FIN.                                                             
+           STOP RUN.                                                    
+      *--------------------------NIVEAU 2                               
+       BOUC2.                                                           
+      D    DISPLAY '      JE SUIS BIEN DANS LA BOUCLE2: ' WS-VAR2.      
+           MOVE 1 TO WS-VAR3.                                           
+           PERFORM BOUC3 UNTIL WS-VAR3 = 7.                             
+      D    DISPLAY '****************************: '.                    
+      D    DISPLAY '*********INCREMENTATION VAR2: '.  
+     D    DISPLAY '****************************: '.                    
+          ADD 1 TO WS-VAR2.                                            
+     *--------------------------NIVEAU 3                               
+      BOUC3.                                                           
+     D    DISPLAY 'JE SUIS BIEN DANS LA BOUCLE3: ' WS-VAR3.            
+          ADD 1 TO WS-VAR3.                                            
+*************************** Bottom of Data ****************************                  
