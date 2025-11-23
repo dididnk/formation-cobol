@@ -1,0 +1,14 @@
+       IDENTIFICATION DIVISION. 
+       PROGRAM-ID. PGADD.
+      * Fait la somme de deux nombres passés en paramètres
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION. 
+       LINKAGE SECTION.
+       01  NOMBRE1     PIC 9(4).
+       01  NOMBRE2     PIC 9(4).
+       01  RESULTAT    PIC 9(4).
+       PROCEDURE DIVISION USING NOMBRE1, NOMBRE2, RESULTAT.
+           COMPUTE RESULTAT = NOMBRE1 + NOMBRE2.
+           EXIT.
