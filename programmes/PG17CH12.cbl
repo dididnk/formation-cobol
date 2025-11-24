@@ -8,7 +8,7 @@
        INPUT-OUTPUT SECTION.                                            
        FILE-CONTROL.                                                    
       *DEFINITION FICHIER ECRAN/IPRIMANTE                               
-           SELECT FPRINT ASSIGN TO "DDPRINT.dat"                              
+           SELECT FPRINT ASSIGN TO DDPRINT                              
            ORGANIZATION IS SEQUENTIAL                                   
            ACCESS MODE IS SEQUENTIAL                                    
            FILE STATUS IS FS-PRINT.                                     
@@ -37,7 +37,7 @@
        01 LG-TRAC.                                                      
           05 FILLER        PIC X(5) VALUE '     '.                      
           05 FILLER        PIC X(16) VALUE '*--------------*'.          
-            05 FILLER        PIC X(21) VALUE '--------------------*'.     
+          05 FILLER        PIC X(21) VALUE '--------------------*'.     
           05 FILLER        PIC X(16) VALUE '---------------*'.          
           05 FILLER        PIC X(16) VALUE '---------------*'.          
        01 LG-ENT-DET.                                                   
@@ -73,7 +73,7 @@
           05 FILLER        PIC X(4)  VALUE ' I  '.                      
           05 WE-DEBIT      PIC +ZZZBZZ9.99.                             
           05 FILLER        PIC X(5)  VALUE '  I  '.                     
-          05 WE-CREDIT     PIC +ZZZBZZ9.99.                             
+          05 WE-CREDIT     PIC S9(7)V99 SIGN LEADING SEPARATE.                   
           05 FILLER        PIC X(3)  VALUE '  I'.                       
                                                                         
        01 LG-PIEDPG.                                                    
