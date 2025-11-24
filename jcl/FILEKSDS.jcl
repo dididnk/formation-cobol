@@ -7,13 +7,13 @@
 //DELKSDS EXEC PGM=IDCAMS
 //SYSPRINT DD SYSOUT=*
 //SYSIN DD *
-    DELETE FORM1011.FILES.EMP.KSDS CLUSTER PURGE
+    DELETE FORM1011.FILES.SOURCESKSDS CLUSTER PURGE
 /*
 
 //STEPDEF EXEC PGM=IDCAMS
 //SYSPRINT DD SYSOUT=*
 //SYSIN DD *
-    DEFINE CLUSTER (NAME(FORM1011.FILES.EMP.KSDS) -
+    DEFINE CLUSTER (NAME(FORM1011.FILES.SOURCESKSDS) -
                     INDEXED                       -
                     VOL(FDDBAS)                   -
                     TRACKS(1 1)                   -
@@ -21,8 +21,8 @@
                     RECORDSIZE(80 80)             -
                     CISZ(4096)                    -
                     NOREUSE)                      -
-          DATA (NAME(FORM1011.FILES.EMP.KSDS.DATA)) -
-          INDEX(NAME(FORM1011.FILES.EMP.KSDS.INDEX))
+          DATA (NAME(FORM1011.FILES.SOURCESKSDS.DATA)) -
+          INDEX(NAME(FORM1011.FILES.SOURCESKSDS.INDEX))
 /*
 
 //STEPLOAD EXEC PGM=IDCAMS
@@ -51,6 +51,6 @@
 /*
 //SYSIN DD *
     REPRO INFILE(ENTDATA) -
-          OUTDATASET(FORM1011.FILES.EMP.KSDS)
+          OUTDATASET(FORM1011.FILES.SOURCESKSDS)
 /*
 //

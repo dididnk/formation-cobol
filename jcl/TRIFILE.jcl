@@ -5,11 +5,11 @@
 //*----------------------------------------------------------------*    
 //JOBLIB   DD DSN=FORM1011.COBOL.LOAD,DISP=SHR                          
 //COMPIL   EXEC PGM=PG16CH11                                            
-//FINPUT   DD DSN=FORM1011.FILES.EMP.PS,DISP=SHR                       
-//FOUTPUT  DD DSN=FORM1011.FILES.EMP.TR,DISP=(NEW,CATLG,DELETE),       
+//FINPUT   DD DSN=FORM1011.FILES.SOURCESPS,DISP=SHR                       
+//FOUTPUT  DD DSN=FORM1011.FILES.SOURCESTR,DISP=(NEW,CATLG,DELETE),       
 //            UNIT=3390,SPACE=(TRK,(4,1),RLSE),                         
 //            DCB=(LRECL=80,BLKSIZE=800,RECFM=FB)                       
-//FWORK    DD DSN=FORM1011.FILES.EMP.WK,DISP=(NEW,DELETE,DELETE),      
+//FWORK    DD DSN=FORM1011.FILES.SOURCESWK,DISP=(NEW,DELETE,DELETE),      
 //            UNIT=3390,SPACE=(TRK,(4,1),RLSE),                         
 //            DCB=(LRECL=80,BLKSIZE=800,RECFM=FB)                       
 //SYSOUT   DD SYSOUT=*                                                  

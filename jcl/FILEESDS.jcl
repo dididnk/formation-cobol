@@ -6,7 +6,7 @@
 //ETAPE1 EXEC PGM=IEFBR14                                               
 //SYSPRINT DD SYSOUT=*                                                  
 //SYSOUT   DD SYSOUT=*                                                  
-//UT01     DD DSN=FORM1011.FILES.EMP.PS,                               
+//UT01     DD DSN=FORM1011.FILES.SOURCESPS,                               
 //            DISP=(OLD,DELETE,DELETE)                                  
 /*                                                                      
 //*----------------------------------------------------------------     
@@ -36,7 +36,7 @@
 00019  FOURATI     LILLE       11000                                    
 00020  DEGROOT     LILLE       14500                                    
 /*                                                                      
-//SYSUT2  DD DSN=FORM1011.FILES.EMP.PS,DISP=(NEW,CATLG,DELETE),        
+//SYSUT2  DD DSN=FORM1011.FILES.SOURCESPS,DISP=(NEW,CATLG,DELETE),        
 //           SPACE=(TRK,(1,1)),UNIT=3390,VOL=SER=FDDBAS,                
 //           DCB=(LRECL=80,BLKSIZE=0,RECFM=FB,DSORG=PS)                 
 //SYSIN   DD DUMMY                                                      
@@ -47,8 +47,8 @@
 //ETAPE3 EXEC PGM=IDCAMS                                                
 //SYSPRINT DD SYSOUT=*                                                  
 //SYSIN DD *                                                            
-    DELETE FORM1011.FILES.EMP.ES  PURGE                                
-    DEFINE CLUSTER (NAME(FORM1011.FILES.EMP.ES)  -                     
+    DELETE FORM1011.FILES.SOURCESES  PURGE                                
+    DEFINE CLUSTER (NAME(FORM1011.FILES.SOURCESES)  -                     
                     TRACKS ( 1 1 )                  -                   
                     VOL    (FDDBAS)                 -                   
                     CISZ   (4096)                   -                   
@@ -57,17 +57,17 @@
                     NONINDEXED                      -                   
                     REUSE                           -                   
                     )                               -                   
-           DATA  (NAME(FORM1011.FILES.EMP.ES.DATA))                    
+           DATA  (NAME(FORM1011.FILES.SOURCESES.DATA))                    
     IF LASTCC=0 THEN                                -                   
-       LISTCAT ALL LEVEL(FORM1011.FILES.EMP.ES)                        
+       LISTCAT ALL LEVEL(FORM1011.FILES.SOURCESES)                        
 /*                                                                      
 //*---------------------------------------------                        
 //*ETAPE4 COPY PS SUR ESDS                                              
 //*---------------------------------------------                        
 //ETAPE4   EXEC PGM=IDCAMS                                              
 //SYSPRINT DD   SYSOUT=*                                                
-//INPUT    DD   DSN=FORM1011.FILES.EMP.PS,DISP=SHR                     
-//OUTPUT   DD   DSN=FORM1011.FILES.EMP.ES,DISP=SHR                     
+//INPUT    DD   DSN=FORM1011.FILES.SOURCESPS,DISP=SHR                     
+//OUTPUT   DD   DSN=FORM1011.FILES.SOURCESES,DISP=SHR                     
 //SYSIN DD *                                                            
       REPRO  -                                                          
            INFILE(INPUT) -                                              
@@ -79,7 +79,7 @@
 //ETAPE5 EXEC PGM=IDCAMS                                                
 //SYSPRINT DD SYSOUT=*                                                  
 //SYSOUT   DD SYSOUT=*                                                  
-//INDD  DD DSN=FORM1011.FILES.EMP.ES,DISP=SHR                          
+//INDD  DD DSN=FORM1011.FILES.SOURCESES,DISP=SHR                          
 //SYSIN DD *                                                            
      PRINT -                                                            
      INFILE(INDD) -                                                     

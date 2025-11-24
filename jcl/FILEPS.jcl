@@ -4,7 +4,7 @@
 //*     CREATION DU PS (SUPPRESSION SI EXISTANT + RECREATION)       *
 //*------------------------------------------------------------------*
 //CRTPS    EXEC PGM=IEFBR14
-//DD1      DD  DSN=FORM1011.FILES.EMP.PS,
+//DD1      DD  DSN=FORM1011.FILES.SOURCESPS,
 //             DISP=(MOD,DELETE,CATLG),
 //             UNIT=SYSDA,
 //             SPACE=(TRK,(1,1)),
@@ -37,4 +37,4 @@
 00019  FOURATI     LILLE       11000
 00020  DEGROOT     LILLE       14500
 /*
-//SYSUT2   DD DSN=FORM1011.FILES.EMP.PS,DISP=SHR
+//SYSUT2   DD DSN=FORM1011.FILES.SOURCESPS,DISP=SHR

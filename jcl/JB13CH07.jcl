@@ -4,7 +4,7 @@
 //*EXECUTION PROGRAMME PG13CH07                                      
 //*---------------------------------------------                     
 //ETAPEXE      EXEC PGM=PG12CH07                                     
-//EMPDD        DD DSN=FORM1011.FILES.EMP.PS,DISP=SHR                 
+//EMPDD        DD DSN=FORM1011.FILES.SOURCESPS,DISP=SHR                 
 //STEPLIB      DD DSN=FORM1011.COBOL.LOAD(PG12CH07),DISP=SHR         
 //SYSPRINT     DD SYSOUT=*                                           
 /*                                                                   

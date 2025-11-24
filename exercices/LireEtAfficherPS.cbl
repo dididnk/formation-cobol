@@ -5,7 +5,7 @@
        ENVIRONMENT DIVISION.                                            
        INPUT-OUTPUT SECTION.                                            
        FILE-CONTROL.                                                    
-           SELECT EMPFILE ASSIGN TO "FORM1011.FILES.EMP.PS"                          
+           SELECT EMPFILE ASSIGN TO "FORM1011.FILES.SOURCESPS"                          
            ORGANIZATION IS SEQUENTIAL                                   
            FILE STATUS IS WS-FSEMP.                                     
                                                                         

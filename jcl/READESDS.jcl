@@ -6,6 +6,6 @@
 //STEP1 EXEC PGM=IDCAMS                                       
 //SYSPRINT DD SYSOUT=*                                        
 //SYSIN    DD *                                               
-  PRINT INDATASET(FORM1011.FILES.EMP.ESDS) CHARACTER          
+  PRINT INDATASET(FORM1011.FILES.SOURCESESDS) CHARACTER          
 /*                                                            
 //                                                            
