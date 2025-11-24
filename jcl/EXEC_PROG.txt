@@ -1,0 +1,14 @@
+***************************** Top of Data ******************************
+//COMPIL2 JOB COMPIL2,'COMPIL2',MSGLEVEL=(1,1),REGION=4M,               
+//           MSGCLASS=A,CLASS=A,NOTIFY=&SYSUID                          
+//*---------------------------------------------                        
+//*EXECUTION PROGRAMME AFFICHAGE PG17CH12                                       
+//*---------------------------------------------                        
+//STEPTEST     EXEC PGM=PG17CH12                                        
+//STEPLIB      DD DSN=FORM1011.COBOL.LOAD,DISP=SHR                      
+//SYSPRINT     DD SYSOUT=*                                              
+//SYSOUT       DD SYSOUT=*                                              
+//DDPRINT      DD SYSOUT=C                                              
+/*                                                                      
+//                                                                      
+**************************** Bottom of Data ****************************

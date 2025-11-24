@@ -1,0 +1,21 @@
+***************************** Top of Data ******************************
+       IDENTIFICATION DIVISION.                                         
+       PROGRAM-ID. PGMPRINC.                                            
+       DATA DIVISION.                                                   
+       FILE SECTION.                                                    
+       WORKING-STORAGE SECTION.                                         
+       01  WS-E1     PIC 9(3) VALUE 124.                                
+       01  WS-E2     PIC 9(3) VALUE 577.                                
+       01  WS-E3     PIC 9(3) VALUE 0.                                  
+       PROCEDURE DIVISION.                                              
+           DISPLAY 'AVANT APPEL'.                                       
+           DISPLAY 'E1: ' WS-E1.                                        
+           DISPLAY 'E2: ' WS-E2.                                        
+           DISPLAY 'E3: ' WS-E3.                                        
+           CALL 'PGAPPELE' USING WS-E1, WS-E2, WS-E3.                   
+           DISPLAY 'APRES APPEL'.                                       
+           DISPLAY 'E1: ' WS-E1.                                        
+           DISPLAY 'E2: ' WS-E2.                                        
+           DISPLAY 'E3: ' WS-E3.                                        
+           STOP RUN.                                                    
+**************************** Bottom of Data ****************************

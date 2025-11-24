@@ -1,0 +1,12 @@
+//COMPRINC JOB CBLCL,'CBLCL',MSGLEVEL=(1,1),REGION=4M,                  
+//           MSGCLASS=A,CLASS=A,NOTIFY=&SYSUID                          
+//*---------------------------------------------                        
+//*JCL DE COMPILATION & EDITION DE LIEN PROGRAMME WELCOME               
+//*---------------------------------------------                        
+//CBLCL EXEC IGYWCL                                                     
+//COBOL.SYSIN  DD DSN=FORM1011.COBOL.SOURCES(PGMPRINC),DISP=SHR         
+//COBOL.SYSLIB DD DSN=FORM1011.COBOL.LINK,DISP=SHR                      
+//LKED.SYSLIB  DD DSN=FORM1011.COBOL.LOAD,DISP=SHR                      
+//LKED.SYSLMOD DD DSN=FORM1011.COBOL.LOAD(PGMPRINC),DISP=SHR            
+/*                                                                      
+//                                                                      

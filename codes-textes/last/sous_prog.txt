@@ -1,0 +1,13 @@
+***************************** Top of Data ******************************
+       IDENTIFICATION DIVISION.                                         
+       PROGRAM-ID. PGAPPELE.                                            
+       DATA DIVISION.                                                   
+       FILE SECTION.                                                    
+       LINKAGE SECTION.                                                 
+       01  LS-E1     PIC 9(3).                                          
+       01  LS-E2     PIC 9(3).                                          
+       01  LS-E3     PIC 9(3).                                          
+       PROCEDURE DIVISION USING LS-E1, LS-E2, LS-E3.                    
+           ADD LS-E1 TO LS-E2 GIVING LS-E3.                             
+           EXIT.                                                        
+**************************** Bottom of Data ****************************
