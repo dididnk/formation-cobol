@@ -1,36 +1,16 @@
-       IDENTIFICATION DIVISION. 
-       PROGRAM-ID. EXO1.
-       AUTHOR E NGBAME.
-
-       ENVIRONMENT DIVISION. 
-       CONFIGURATION SECTION.
-
-       DATA DIVISION. 
-       FILE SECTION.
-
-       WORKING-STORAGE SECTION.
-       01  WS-OLD      PIC 9(3) VALUE ZERO.
-       01  MAX      PIC 9(2) VALUE 18.
-
-       PROCEDURE DIVISION.
-           PERFORM INIT.
-           PERFORM TRAIT.
-           PERFORM FIN.
+       IDENTIFICATION DIVISION.                                         00010000
+       PROGRAM-ID. EXO1.                                                00020000
+       AUTHOR E NGBAME.                                                 00030000
+       DATA DIVISION.                                                   00040000
+       WORKING-STORAGE SECTION.                                         00050000
+       01  WS-OLD   PIC 9(3) VALUE 26.                                  00060000
+       PROCEDURE DIVISION.                                              00070000
+           IF WS-OLD >= 18 THEN                                         00080000
+              DISPLAY "CONGRATS YOU CAN LEARN COBOL :)"                 00090000
+           ELSE                                                         00100000
+              DISPLAY "SORRY, YOU CAN NOT LEARN COBOL AT YOUR AGE."     00110000
+           END-IF.                                                      00120000
+           DISPLAY "*********** FIN PROGRAMME ***********".             00130000
+           STOP RUN.                                                    00140000
+                                                                        00150000
        
-       INIT.
-           DISPLAY "*********** DEBUT PROGRAMME ***********".
-           MOVE 26 TO WS-OLD.
-       
-       TRAIT.
-           IF WS-OLD >= MAX THEN
-              DISPLAY "Congrats you can learn cobol :)"
-           ELSE
-              DISPLAY "Sorry, you can not learn cobol at your age"
-           END-IF.
-           EXIT.
-
-       FIN.
-           DISPLAY "*********** FIN PROGRAMME ***********".
-           STOP RUN.
-
-

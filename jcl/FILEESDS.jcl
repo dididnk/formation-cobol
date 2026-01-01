@@ -47,8 +47,8 @@
 //ETAPE3 EXEC PGM=IDCAMS                                                
 //SYSPRINT DD SYSOUT=*                                                  
 //SYSIN DD *                                                            
-    DELETE FORM1011.FILES.SOURCESES  PURGE                                
-    DEFINE CLUSTER (NAME(FORM1011.FILES.SOURCESES)  -                     
+    DELETE FORM1011.FILES.SOURCES.ES  PURGE                                
+    DEFINE CLUSTER (NAME(FORM1011.FILES.SOURCES.ES)  -                     
                     TRACKS ( 1 1 )                  -                   
                     VOL    (FDDBAS)                 -                   
                     CISZ   (4096)                   -                   
@@ -57,9 +57,9 @@
                     NONINDEXED                      -                   
                     REUSE                           -                   
                     )                               -                   
-           DATA  (NAME(FORM1011.FILES.SOURCESES.DATA))                    
+           DATA  (NAME(FORM1011.FILES.SOURCES.ES.DATA))                    
     IF LASTCC=0 THEN                                -                   
-       LISTCAT ALL LEVEL(FORM1011.FILES.SOURCESES)                        
+       LISTCAT ALL LEVEL(FORM1011.FILES.SOURCES.ES)                        
 /*                                                                      
 //*---------------------------------------------                        
 //*ETAPE4 COPY PS SUR ESDS                                              
@@ -67,7 +67,7 @@
 //ETAPE4   EXEC PGM=IDCAMS                                              
 //SYSPRINT DD   SYSOUT=*                                                
 //INPUT    DD   DSN=FORM1011.FILES.SOURCESPS,DISP=SHR                     
-//OUTPUT   DD   DSN=FORM1011.FILES.SOURCESES,DISP=SHR                     
+//OUTPUT   DD   DSN=FORM1011.FILES.SOURCES.ES,DISP=SHR                     
 //SYSIN DD *                                                            
       REPRO  -                                                          
            INFILE(INPUT) -                                              
@@ -79,7 +79,7 @@
 //ETAPE5 EXEC PGM=IDCAMS                                                
 //SYSPRINT DD SYSOUT=*                                                  
 //SYSOUT   DD SYSOUT=*                                                  
-//INDD  DD DSN=FORM1011.FILES.SOURCESES,DISP=SHR                          
+//INDD  DD DSN=FORM1011.FILES.SOURCES.ES,DISP=SHR                          
 //SYSIN DD *                                                            
      PRINT -                                                            
      INFILE(INDD) -                                                     

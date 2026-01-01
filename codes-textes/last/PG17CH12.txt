@@ -1,3 +1,4 @@
+***************************** Top of Data ******************************
        IDENTIFICATION DIVISION.                                         
        PROGRAM-ID. PG17CH12.                                            
        AUTHOR.     N GAIGI.                                             
@@ -131,3 +132,4 @@
        FIN.                                                             
            CLOSE FPRINT.                                                
            STOP RUN.                                                    
+**************************** Bottom of Data ****************************                                               

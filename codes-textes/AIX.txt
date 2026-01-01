@@ -1,0 +1,47 @@
+***************************** Top of Data ******************************
+//JB19CH08 JOB JB19CH08,'JB19CH08',MSGLEVEL=(1,1),REGION=4M,            
+//           MSGCLASS=A,CLASS=A,NOTIFY=&SYSUID                          
+//*------------------------------------------------                     
+//*ETAPE1 DEL,DEF AIX AGENCE POUR LE FICHIER CLIENT                     
+//*------------------------------------------------                     
+//ETAPE1 EXEC PGM=IDCAMS                                                
+//SYSPRINT DD SYSOUT=*                                                  
+//SYSIN DD *                                                            
+     DELETE  FORM1011.AIX.AGENCE                                        
+     DEFINE AIX                             -                           
+     (NAME (FORM1011.AIX.AGENCE)            -                           
+     RELATE (FORM1011.CLT.KSDS)       -                                 
+     TRACKS(1,1)                            -                           
+     VOLUMES(FDDBAS)                        -                           
+     RECORDSIZE(52 52)                      -                           
+     SHAREOPTIONS(1 3)                      -                           
+     KEYS(7 45)                      -                                  
+     FREESPACE(10 10)                -                                  
+     NOREUSE                         -                                  
+     UPGRADE                         -                                  
+     NONUNIQUEKEY )                                                     
+//*---------------------------------------------------------            
+//*ETAPE2 DEFINE PATH DE L'AIX AGENCE AVEC KSDS CLIENT                  
+//*---------------------------------------------------------            
+//ETAPE2 EXEC PGM=IDCAMS                                                
+//SYSPRINT DD SYSOUT=*                                                  
+//SYSIN DD *                                                            
+     DELETE  FORM1011.PATH.AIX.AGENCE                                   
+     DEFINE PATH                                   -                    
+            (NAME (FORM1011.PATH.AIX.AGENCE)       -                    
+            PATHENTRY (FORM1011.AIX.AGENCE))                            
+//*---------------------------------------------------------            
+//*ETAPE3 DEFINE DE BUILDINDEX: BLDINDEX AGENCE KSDS CLIENT             
+//*---------------------------------------------------------            
+//ETAPE3 EXEC PGM=IDCAMS                                                
+//SYSPRINT DD SYSOUT=*                                                  
+//SYSIN DD *                                                            
+         BLDINDEX                               -                       
+         INDATASET  (FORM1011.CLT.KSDS)   -                             
+         OUTDATASET (FORM1011.AIX.AGENCE)       -                       
+         NOSORTCALL                                                     
+     IF LASTCC=0 THEN -                                                 
+        LISTCAT ENTRIES (FORM1011.AIX.AGENCE) ALL                       
+/*                                                                      
+//                                                                      
+**************************** Bottom of Data ****************************

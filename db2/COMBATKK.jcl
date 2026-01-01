@@ -1,0 +1,77 @@
+//COMBATKK JOB (2025),'XXXXXXX',MSGCLASS=X,CLASS=A,             
+//             NOTIFY=&SYSUID                                    
+//JOBLIB   DD DSN=DSNA10.SDSNLOAD,DISP=SHR                        
+//*---------------------------------------------------------------------     
+//*                   COMPILE COBOL BATCH DB2                          *          
+//*---------------------------------------------------------------------     
+//*------------------------ PRECOMPILATION -----------------------------     
+//PC       EXEC PGM=DSNHPC,                                      
+//         PARM=('HOST(IBMCOB),APOST,XREF,DATE(ISO),NOSOURCE',''),  
+//         REGION=4096K                                          
+//DBRMLIB  DD  DISP=SHR,DSN=FORM1112.DB2.DBRM(PG01DB2)           
+//STEPLIB  DD  DISP=SHR,DSN=DSNA10.SDSNLOAD                      
+//SYSIN    DD  DISP=SHR,DSN=FORM1112.DB2.SOURCE(PG01DB2)         
+//SYSCIN   DD  DSN=&&TEMP,DISP=(MOD,PASS),                       
+//             SPACE=(800,(500,500)),UNIT=SYSDA                 
+//SYSLIB   DD  DISP=SHR,DSN=FORM1112.DB2.COPYBOOK                
+//SYSPRINT DD  SYSOUT=T                                          
+//SYSTERM  DD  SYSOUT=T                                          
+//SYSUDUMP DD  SYSOUT=*                                          
+//SYSUT1   DD  SPACE=(800,(500,500),,,ROUND),UNIT=SYSDA          
+//SYSUT2   DD  SPACE=(800,(500,500),,,ROUND),UNIT=SYSDA          
+//SYSUT3   DD  SPACE=(800,(500,500),,,ROUND),UNIT=SYSDA          
+//SYSUT4   DD  SPACE=(800,(500,500),,,ROUND),UNIT=SYSDA          
+//SYSUT5   DD  SPACE=(800,(500,500),,,ROUND),UNIT=SYSDA          
+//SYSUT6   DD  SPACE=(800,(500,500),,,ROUND),UNIT=SYSDA          
+//SYSUT7   DD  SPACE=(800,(500,500),,,ROUND),UNIT=SYSDA          
+
+//*--------------------------- COMPILATION -----------------------------     
+//COB      EXEC PGM=IGYCRCTL,COND=(8,LT,PC),                     
+//         PARM=('SIZE(4000K),BUFSIZE(32760),LIB,MAP,OBJECT',    
+//         'DATA(31),XREF,RENT,FSRT,OFFSET,NODYNAM,APOST'),      
+//         REGION=4M                                             
+//STEPLIB  DD  DISP=SHR,DSN=IGY420.SIGYCOMP                      
+//SYSIN    DD  DISP=(OLD,DELETE),DSN=&&TEMP                      
+//SYSLIN   DD  DISP=(MOD,PASS),DSN=&&LOADTMP,                    
+//             SPACE=(800,(500,500)),UNIT=SYSDA                  
+//SYSLIB   DD  DISP=SHR,DSN=FORM1112.DB2.COPYBOOK                
+//         DD  DISP=SHR,DSN=FORM1112.DB2.SOURCE                  
+//SYSPRINT DD  SYSOUT=*                                          
+//SYSUDUMP DD  SYSOUT=*                                          
+//SYSUT1   DD  SPACE=(800,(500,500),,,ROUND),UNIT=SYSDA          
+//SYSUT2   DD  SPACE=(800,(500,500),,,ROUND),UNIT=SYSDA          
+//SYSUT3   DD  SPACE=(800,(500,500),,,ROUND),UNIT=SYSDA          
+//SYSUT4   DD  SPACE=(800,(500,500),,,ROUND),UNIT=SYSDA          
+//SYSUT5   DD  SPACE=(800,(500,500),,,ROUND),UNIT=SYSDA          
+//SYSUT6   DD  SPACE=(800,(500,500),,,ROUND),UNIT=SYSDA          
+//SYSUT7   DD  SPACE=(800,(500,500),,,ROUND),UNIT=SYSDA          
+
+//*----------------------------- LINK ----------------------------------     
+//LKED     EXEC PGM=IEWL,COND=((4,LT,COB),(4,LT,PC)),            
+//         PARM='XREF'                                           
+//SYSLIB   DD  DISP=SHR,DSN=CEE.SCEELKED                         
+//         DD  DISP=SHR,DSN=DSNA10.SDSNLOAD                      
+//         DD  DISP=SHR,DSN=FORM1112.DB2.LOAD                   
+//SYSLIN   DD  DISP=(OLD,DELETE),DSN=&&LOADTMP                   
+//SYSLMOD  DD  DISP=SHR,DSN=FORM1112.DB2.LOAD(PG01DB2)           
+//SYSPRINT DD  SYSOUT=*                                          
+//SYSUDUMP DD  SYSOUT=*                                          
+//SYSUT1   DD  SPACE=(1024,(50,50)),UNIT=SYSDA                   
+
+//*------------------------------ BIND ---------------------------------     
+//BIND     EXEC PGM=IKJEFT01,COND=(8,LT),REGION=4096K            
+//DBRMLIB  DD  DISP=SHR,DSN=FORM1112.DB2.DBRM(PG01DB2)           
+//SYSPRINT DD  SYSOUT=*                                          
+//SYSTSPRT DD  SYSOUT=*                                          
+//SYSUDUMP DD  SYSOUT=*                                          
+//SYSTSIN  DD  *                                                 
+DSN SYSTEM(DBAG)                                                
+BIND  MEMBER(PG01DB2) -                                         
+      PLAN(PG01DB2) -                                           
+      ACTION(REP) -                                             
+      ISOLATION(CS) -                                           
+      ENCODING(EBCDIC) -                                        
+      OWNER(IBMUSER) -                                          
+      QUALIFIER(IBMUSER)                                        
+END                                                             
+/*  
